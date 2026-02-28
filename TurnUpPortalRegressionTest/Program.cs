@@ -8,6 +8,11 @@ public class Program
         //open the browser
         IWebDriver driver = new ChromeDriver();
 
+        // Open Chrome Browser
+        ChromeOptions options = new ChromeOptions();
+        options.AddUserProfilePreference("profile.password_manager_leak_detection", false);
+        driver = new ChromeDriver(options);
+
         //Launch turnup portal
         driver.Navigate().GoToUrl("http://horse.industryconnect.io");
         driver.Manage().Window.Maximize();
@@ -15,11 +20,11 @@ public class Program
 
         //identify username textbox and enter valid username
         IWebElement usernameTextbox = driver.FindElement(By.Id("UserName"));
-        usernameTextbox.SendKeys("Meththani");
+        usernameTextbox.SendKeys("hari");
 
         //identify password textbox and enter valid password
         IWebElement passwordTextbox = driver.FindElement(By.Id("Password"));
-        passwordTextbox.SendKeys("user123");
+        passwordTextbox.SendKeys("123123");
 
         //identify login button and click on
         IWebElement loginButton = driver.FindElement(By.XPath("//*[@id=\"loginForm\"]/form/div[3]/input[1]"));
@@ -29,7 +34,7 @@ public class Program
         //check if user has logged in successfully
         IWebElement hellometh = driver.FindElement(By.XPath("//*[@id=\"logoutForm\"]/ul/li/a"));
 
-        if (hellometh.Text == "Hello meththani!")
+        if (hellometh.Text == "Hello hari!")
         {
             Console.WriteLine("User logged successfully. Test Passed !!");
         }
@@ -43,6 +48,7 @@ public class Program
         //navigate to Administration Page to select the time and Material from the drop down
         IWebElement adminPage = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a"));
         adminPage.Click();
+        Thread.Sleep(3000);
 
         //select the time and Material from the drop down
         IWebElement timeMaterial = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a"));
@@ -86,7 +92,7 @@ public class Program
         IWebElement goToLastpageButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
         goToLastpageButton.Click();
 
-        IWebElement newCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span"));
+        IWebElement newCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
 
         if (newCode.Text == "TA Program")
         {
